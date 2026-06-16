@@ -1507,20 +1507,20 @@
                   <stop offset="100%" stop-color="#21a05a"/>
                 </linearGradient>
               </defs>
-              <!-- r=90, circumference=565.49 -->
-              <!-- Green 91%: 514.6px, gap 50.9px, starts at 12 o'clock (offset=141.37) -->
-              <!-- Navy  9%:  50.9px,  gap 514.6px, starts where green ends (offset=-373.2) -->
+              <!-- r=90, circumference=565.49 — animated via JS -->
               <circle cx="110" cy="110" r="90" stroke="url(#donutGradient)" stroke-width="26"
-                stroke-dasharray="514.6 50.9"
+                id="donut-green"
+                stroke-dasharray="0 565.49"
                 stroke-dashoffset="141.37"
                 stroke-linecap="butt"/>
               <circle cx="110" cy="110" r="90" stroke="#0a1120" stroke-width="26"
-                stroke-dasharray="50.9 514.6"
-                stroke-dashoffset="-373.2"
+                id="donut-navy"
+                stroke-dasharray="565.49 0"
+                stroke-dashoffset="141.37"
                 stroke-linecap="butt"/>
             </svg>
             <div class="donut-label">
-              <div class="donut-pct">91%</div>
+              <div class="donut-pct" id="donut-number">1%</div>
               <div class="donut-sublabel">Research Online<br>Before Calling</div>
             </div>
           </div>
@@ -2050,6 +2050,67 @@
       }
     });
   });
+
+  // Donut chart animation — triggers when scrolled into view
+  (function() {
+    const CIRCUMFERENCE = 565.49;
+    const TARGET = 91;
+    const DURATION = 1800; // ms
+    const green = document.getElementById('donut-green');
+    const navy  = document.getElementById('donut-navy');
+    const label = document.getElementById('donut-number');
+    let animated = false;
+
+    function animateDonut() {
+      if (animated) return;
+      animated = true;
+
+      const start = performance.now();
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / DURATION, 1);
+        const eased = easeOutCubic(progress);
+        const pct = Math.round(1 + (TARGET - 1) * eased);
+        const greenLen = CIRCUMFERENCE * (pct / 100);
+        const navyLen  = CIRCUMFERENCE - greenLen;
+
+        // Green arc grows
+        green.setAttribute('stroke-dasharray', `${greenLen} ${navyLen}`);
+
+        // Navy arc shrinks, offset so it starts exactly where green ends
+        const navyOffset = 141.37 - greenLen;
+        navy.setAttribute('stroke-dasharray', `${navyLen} ${greenLen}`);
+        navy.setAttribute('stroke-dashoffset', navyOffset);
+
+        // Counter
+        label.textContent = pct + '%';
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    // Trigger when donut scrolls into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateDonut();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const chart = document.querySelector('.donut-chart');
+    if (chart) observer.observe(chart);
+  })();
 </script>
 </body>
 </html>
