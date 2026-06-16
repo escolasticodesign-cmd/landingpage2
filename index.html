@@ -360,9 +360,9 @@
 
   /* LOGO BAR — diagonal clip into white */
   .logo-bar {
-    background: var(--navy);
+    background: linear-gradient(160deg, #0a1120 0%, #0c1730 60%, #0e1a35 100%);
     padding: 32px 3rem 100px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(255,255,255,0.04);
     position: relative;
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
   }
@@ -416,7 +416,7 @@
 
   .section-label {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     background: var(--green-gradient);
@@ -424,7 +424,20 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: '';
     display: block;
+    height: 2px;
+    width: 32px;
+    background: var(--green-gradient);
+    flex-shrink: 0;
   }
 
   .section h2 {
@@ -461,27 +474,12 @@
   }
 
   .ai-reads .section-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--green-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1.25rem;
+    justify-content: flex-start;
   }
 
-  .ai-reads .section-label::before {
-    content: '';
-    display: inline-block;
+  .ai-reads .section-label::before,
+  .ai-reads .section-label::after {
     width: 28px;
-    height: 2px;
-    background: var(--green-gradient);
-    flex-shrink: 0;
   }
 
   .ai-reads h2 {
@@ -632,7 +630,7 @@
 
   .mentions-table thead th {
     padding: 14px 20px;
-    text-align: left;
+    text-align: center;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
@@ -667,14 +665,21 @@
   .stats-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
+    gap: 0;
     margin-top: 2rem;
-    background: var(--border);
+    background: #eef7ee;
+    border-radius: 16px;
+    border: 1px solid #d4ecd4;
+    overflow: hidden;
   }
 
   .stat-box {
-    background: var(--white);
-    padding: 24px 28px;
+    background: transparent;
+    padding: 28px 32px;
+  }
+
+  .stat-box:first-child {
+    border-right: 1px solid #d4ecd4;
   }
 
   .stat-num {
@@ -703,7 +708,15 @@
     padding: 80px 2rem;
   }
 
-  .why-audit .section-label { background: var(--green-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .section-label-white {
+    background: none;
+    -webkit-text-fill-color: rgba(255,255,255,0.7);
+  }
+
+  .section-label-white::before,
+  .section-label-white::after {
+    background: rgba(255,255,255,0.4);
+  }
 
   .why-audit h2 {
     color: var(--white);
@@ -730,18 +743,25 @@
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     padding: 28px;
+    text-align: left;
   }
 
   .audit-card-icon {
     width: 40px;
     height: 40px;
-    background: var(--green-gradient);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .audit-card-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: rgba(255,255,255,0.5);
+    stroke-width: 1.5;
   }
 
   .audit-card h3 {
@@ -750,12 +770,14 @@
     color: var(--white);
     margin-bottom: 10px;
     line-height: 1.3;
+    text-align: left;
   }
 
   .audit-card p {
     font-size: 13px;
     color: rgba(255,255,255,0.55);
     line-height: 1.7;
+    text-align: left;
   }
 
   .why-cta {
@@ -909,43 +931,87 @@
     letter-spacing: 0.04em;
   }
 
-  /* ============ SECTION 6 — OFF-SITE AUTHORITY ============ */
+  /* Stat cards grid in green section */
+  .stat-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .stat-card-num {
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: var(--green-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+  }
+
+  .stat-card-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-weight: 500;
+  }
   .offsite {
     background: var(--off-white);
     padding: 80px 2rem;
-    margin-top: 0;
+    margin-top: calc(-1 * var(--wedge, 60px));
+    padding-top: calc(var(--wedge, 60px) + 80px);
   }
 
   .offsite-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 20px;
     margin-top: 3rem;
   }
 
   .offsite-card {
     background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: left;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   }
 
-  .offsite-icon {
-    font-size: 24px;
-    margin-bottom: 12px;
+  .offsite-step {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--green-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 14px;
+    display: block;
   }
 
   .offsite-card h3 {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
     color: var(--text-dark);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
   }
 
   .offsite-card p {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   /* ============ SECTION 7 — TWO LAYERS ============ */
@@ -1065,6 +1131,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     margin-top: 3rem;
+    text-align: left;
   }
 
   .audit-item {
@@ -1086,7 +1153,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: var(--navy);
+    color: var(--white);
     font-weight: 800;
     font-size: 13px;
   }
@@ -1311,7 +1378,71 @@
     color: rgba(255,255,255,0.35);
   }
 
-  /* ============ RESPONSIVE ============ */
+  /* ============ CARD HOVER EFFECTS ============ */
+
+  /* Dark cards (on navy background) — border brightens with green glow */
+  .audit-card {
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  }
+  .audit-card:hover {
+    border-color: rgba(60, 185, 93, 0.6);
+    box-shadow: 0 0 0 1px rgba(60, 185, 93, 0.3), 0 8px 32px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+  }
+
+  /* White cards (on light background) — lift with subtle shadow */
+  .offsite-card {
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  .offsite-card:hover {
+    box-shadow: 0 8px 32px rgba(60, 185, 93, 0.15), 0 2px 8px rgba(0,0,0,0.08);
+    border-color: rgba(60, 185, 93, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .audit-item {
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  .audit-item:hover {
+    box-shadow: 0 8px 32px rgba(60, 185, 93, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+    border-color: rgba(60, 185, 93, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .layer-box {
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  .layer-box:hover {
+    box-shadow: 0 8px 24px rgba(60, 185, 93, 0.1), 0 2px 8px rgba(0,0,0,0.06);
+    border-color: rgba(60, 185, 93, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .stat-card {
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .stat-card:hover {
+    box-shadow: 0 12px 36px rgba(60, 185, 93, 0.2), 0 2px 8px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+
+  .donut-card {
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  .donut-card:hover {
+    box-shadow: 0 8px 32px rgba(60, 185, 93, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+    border-color: rgba(60, 185, 93, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .rec-card {
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  .rec-card:hover {
+    box-shadow: 0 8px 24px rgba(60, 185, 93, 0.1);
+    border-color: rgba(60, 185, 93, 0.35);
+    transform: translateY(-2px);
+  }
   /* FORM THANK YOU STATE */
   .form-thankyou {
     display: none;
@@ -1610,17 +1741,23 @@
 
     <div class="audit-cards">
       <div class="audit-card">
-        <div class="audit-card-icon">❌</div>
+        <div class="audit-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
         <h3>They don't speak the language</h3>
         <p>ITAR. AS9100. CMMC. NADCAP. Tier 1 OEM. MRO. A generic agency either ignores these or buries them — stripping the technical credibility signals your buyers are specifically scanning for.</p>
       </div>
       <div class="audit-card">
-        <div class="audit-card-icon">❌</div>
+        <div class="audit-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
         <h3>They design for the wrong buyer</h3>
         <p>Consumer-facing websites prioritize emotion. B2B manufacturing websites need to build confidence. Generic agencies give you a pretty site that feels like a brochure, not a capability demonstration.</p>
       </div>
       <div class="audit-card">
-        <div class="audit-card-icon">❌</div>
+        <div class="audit-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
         <h3>They don't understand the sales cycle</h3>
         <p>Your procurement cycle is 12–18 months. Your website needs to work at every stage — from early vendor research to final qualification review. Most agencies only think about the homepage.</p>
       </div>
@@ -1628,7 +1765,7 @@
 
     <div class="why-cta">
       <a href="#audit" class="btn-primary">Click Here To Speak To An Expert</a>
-      <p>The audit shows you exactly where your site is failing the technical buyer's test.</p>
+      <p>The audit covers eight areas — every place your site is silently failing technical buyers.</p>
     </div>
   </div>
 </section>
@@ -1637,7 +1774,7 @@
 <section class="seo-foundation">
   <div class="seo-foundation-grid">
     <div>
-      <span class="section-label" style="color: rgba(255,255,255,0.7);">What we do differently</span>
+      <span class="section-label section-label-white">What we do differently</span>
       <h2>We build for manufacturers. We already know your industry.</h2>
       <p>We've built websites for aerospace suppliers, defense contractors, precision machining shops, and advanced manufacturing companies. We know what procurement teams are looking for — and we build specifically for that buyer.</p>
       <p>That means your website doesn't just look professional. It <strong>functions as your best salesperson</strong> — available 24/7, consistent every time, and always saying exactly the right thing to the right buyer at the right stage of their evaluation.</p>
@@ -1650,41 +1787,22 @@
       </ul>
     </div>
     <div>
-      <div class="green-table">
-        <div class="green-table-header">
-          <span>What we get right</span>
-          <span>Generic Agency</span>
-          <span>Maxburst</span>
+      <div class="stat-cards-grid">
+        <div class="stat-card">
+          <div class="stat-card-num" data-target="150" data-suffix="+">0+</div>
+          <div class="stat-card-label">Manufacturers Served</div>
         </div>
-        <div class="green-table-row">
-          <span>Understands ITAR / AS9100 / CMMC</span>
-          <span><span class="red-tag">NO</span></span>
-          <span><span class="green-tag">YES</span></span>
+        <div class="stat-card">
+          <div class="stat-card-num" data-target="3.2" data-suffix="×" data-decimal="1">0×</div>
+          <div class="stat-card-label">Average RFQ Increase</div>
         </div>
-        <div class="green-table-row">
-          <span>Builds for procurement timelines</span>
-          <span><span class="red-tag">NO</span></span>
-          <span><span class="green-tag">YES</span></span>
+        <div class="stat-card">
+          <div class="stat-card-num" data-target="24" data-suffix="hr">0hr</div>
+          <div class="stat-card-label">Expert Response Time</div>
         </div>
-        <div class="green-table-row">
-          <span>Structures capability for engineers</span>
-          <span><span class="red-tag">NO</span></span>
-          <span><span class="green-tag">YES</span></span>
-        </div>
-        <div class="green-table-row">
-          <span>Designs for long-cycle B2B sales</span>
-          <span><span class="red-tag">NO</span></span>
-          <span><span class="green-tag">YES</span></span>
-        </div>
-        <div class="green-table-row">
-          <span>Knows Tier 1 / MRO / OEM distinctions</span>
-          <span><span class="red-tag">NO</span></span>
-          <span><span class="green-tag">YES</span></span>
-        </div>
-        <div class="green-table-row">
-          <span>Needs to be educated on your industry</span>
-          <span><span class="green-tag">YES</span></span>
-          <span><span class="red-tag">NO</span></span>
+        <div class="stat-card">
+          <div class="stat-card-num" data-target="94" data-suffix="%">0%</div>
+          <div class="stat-card-label">Client Retention Rate</div>
         </div>
       </div>
     </div>
@@ -1700,23 +1818,23 @@
 
     <div class="offsite-grid">
       <div class="offsite-card">
-        <div class="offsite-icon">🔍</div>
-        <h3>1. Buyer Journey Audit</h3>
-        <p>We map exactly how your buyers evaluate suppliers online — then audit your current site against that benchmark. You see every gap before we write a line of code.</p>
+        <span class="offsite-step">Step 01</span>
+        <h3>Website Audit</h3>
+        <p>We run your site through all eight audit areas — catalog discoverability, AI visibility, spec handling, lead capture, UX signals, content gaps, integrations, and performance. You see every failure before we write a line of code.</p>
       </div>
       <div class="offsite-card">
-        <div class="offsite-icon">🏗️</div>
-        <h3>2. Capability Architecture</h3>
+        <span class="offsite-step">Step 02</span>
+        <h3>Capability Architecture</h3>
         <p>We restructure how your capabilities, certifications, and past programs are presented — so engineers find what they need in seconds and program managers can build a case for you upstairs.</p>
       </div>
       <div class="offsite-card">
-        <div class="offsite-icon">⚙️</div>
-        <h3>3. Design &amp; Build</h3>
+        <span class="offsite-step">Step 03</span>
+        <h3>Design &amp; Build</h3>
         <p>Precision-built for your industry. Real shop photography. Credentialing signals in the right places. RFQ flows that convert. No stock photos. No generic templates.</p>
       </div>
       <div class="offsite-card">
-        <div class="offsite-icon">📈</div>
-        <h3>4. Lead Generation &amp; Pipeline</h3>
+        <span class="offsite-step">Step 04</span>
+        <h3>Lead Generation &amp; Pipeline</h3>
         <p>Once live, your website works the full procurement cycle — capturing qualified RFQs, pre-qualifying prospects, and shortening the time from first visit to first conversation.</p>
       </div>
     </div>
@@ -1814,36 +1932,64 @@
 <section class="section audit-contents">
   <div class="section-inner section-center">
     <span class="section-label">Free Website Audit</span>
-    <h2>What you'll get in your free audit.</h2>
-    <p class="section-sub">Not a vague scorecard. Four concrete deliverables that show you exactly where your website is losing RFQs — and what to do about it.</p>
+    <h2>Eight areas. Every place your website is silently losing you contracts.</h2>
+    <p class="section-sub">Eight areas. Every failure mapped. Specific recommendations you can act on — with or without us.</p>
 
     <div class="audit-grid">
       <div class="audit-item">
         <div class="audit-check">✓</div>
         <div>
-          <h4>Buyer Journey Analysis</h4>
-          <p>We walk your site as a procurement engineer would — from first search to RFQ form — and document every point where a qualified buyer would drop off, lose confidence, or give up.</p>
+          <h4>Catalog &amp; Product Discoverability</h4>
+          <p>Can a buyer actually find what they need on your site? We identify every navigation failure, dead-end search, and buried capability that's driving qualified visitors directly to your competitors.</p>
         </div>
       </div>
       <div class="audit-item">
         <div class="audit-check">✓</div>
         <div>
-          <h4>Capability &amp; Credentialing Review</h4>
-          <p>We assess how your certifications, capabilities, past programs, and differentiators are presented — and show you exactly what's missing, buried, or framed wrong for a technical buyer.</p>
+          <h4>AI &amp; Conversational Capability Gaps</h4>
+          <p>37% of product discovery now starts in AI interfaces. If your site can't surface capabilities conversationally, you're invisible to a fast-growing segment of technical buyers before they ever reach you.</p>
         </div>
       </div>
       <div class="audit-item">
         <div class="audit-check">✓</div>
         <div>
-          <h4>Competitor Benchmark</h4>
-          <p>Side-by-side comparison of your site vs. 2–3 competitors in your space — so you can see precisely where they're winning the digital vetting process and you're not.</p>
+          <h4>Technical Specification Handling</h4>
+          <p>B2B buyers make decisions on specs, not marketing copy. We assess whether your site can surface, compare, and communicate specifications at the moment a buyer is ready to decide.</p>
         </div>
       </div>
       <div class="audit-item">
         <div class="audit-check">✓</div>
         <div>
-          <h4>Prioritized Fix List</h4>
-          <p>A ranked list of what to address first, second, and third — based on what will most immediately impact the quality and volume of RFQs your site generates. Specific. Actionable. No fluff.</p>
+          <h4>Lead Capture &amp; Sales Friction</h4>
+          <p>Every unidentified visitor is a lost opportunity. We map every point where your sales team loses visibility — who came, what they needed, and how close they were to submitting an RFQ.</p>
+        </div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-check">✓</div>
+        <div>
+          <h4>Content &amp; Documentation Gaps</h4>
+          <p>Technical buyers research deeply before they buy. We identify where your content can't be found, queried, or understood at the moment of need — and what that's costing you in qualified pipeline.</p>
+        </div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-check">✓</div>
+        <div>
+          <h4>UX &amp; Engagement Signals</h4>
+          <p>Poor UX doesn't announce itself — it shows up in bounce rates, zero-result searches, and single-page sessions. We surface the signals your website is silently failing buyers before they ever contact you.</p>
+        </div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-check">✓</div>
+        <div>
+          <h4>Integration &amp; Data Gaps</h4>
+          <p>Your internal systems hold real-time information buyers need — inventory, lead times, certifications. We identify where your website isn't connected to them and what that disconnect costs you at the point of decision.</p>
+        </div>
+      </div>
+      <div class="audit-item">
+        <div class="audit-check">✓</div>
+        <div>
+          <h4>Catalog Scale &amp; Performance</h4>
+          <p>Static navigation and keyword search collapse under their own weight as your catalog grows. We identify where these issues are compounding invisibly — and what a scalable architecture looks like for your product depth.</p>
         </div>
       </div>
     </div>
@@ -1904,7 +2050,7 @@
           <div class="faq-icon">+</div>
         </div>
         <div class="faq-answer">
-          Most projects run 8–12 weeks from kickoff to launch. We start with a buyer journey audit and capability architecture session — so we understand how your customers evaluate you before we design anything. That means fewer revisions, faster decisions, and a site that actually works when it launches.
+          Most projects run 8–12 weeks from kickoff to launch. We start with the eight-area website audit and a capability architecture session — so we understand exactly where your site is failing buyers before we design anything. That means fewer revisions, faster decisions, and a site that actually works when it launches.
         </div>
       </div>
       <div class="faq-item">
@@ -1943,12 +2089,12 @@
   <div class="footer-cta-inner">
     <div>
       <h2>Your capabilities deserve a website that wins the contracts you're competing for.</h2>
-      <p>The free audit shows you exactly where your digital presence is costing you RFQs — and what to prioritize to fix it. Real deliverable. No pitch disguised as a report.</p>
+      <p>The free audit covers eight areas of your website — every place technical buyers hit friction, lose confidence, or move on to a competitor. Real findings. Specific recommendations. No pitch disguised as a report.</p>
       <ul class="footer-bullets">
-        <li>Buyer journey analysis from a procurement engineer's perspective</li>
-        <li>Capability and credentialing review against your buyers' checklist</li>
-        <li>Competitor benchmark — see who's beating you digitally and why</li>
-        <li>Prioritized fix list you can act on immediately</li>
+        <li>Catalog discoverability — can buyers actually find what they need?</li>
+        <li>Technical specification handling — are your specs surfaced at the moment of decision?</li>
+        <li>Lead capture gaps — do you know who visited and what they needed?</li>
+        <li>AI &amp; content visibility — are you showing up where buyers are searching?</li>
       </ul>
     </div>
     <form class="hero-form-box" action="https://formspree.io/f/mdavjdqy" method="POST">
@@ -2050,7 +2196,48 @@
     });
   });
 
-  // Donut chart animation — triggers when scrolled into view
+  // Stat card count-up animation
+  (function() {
+    const cards = document.querySelectorAll('.stat-card-num');
+    let animated = false;
+
+    function animateStats() {
+      if (animated) return;
+      animated = true;
+
+      cards.forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const decimal = parseInt(el.dataset.decimal || 0);
+        const duration = 1600;
+        const start = performance.now();
+
+        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = easeOutCubic(progress);
+          const val = target * eased;
+          el.textContent = (decimal ? val.toFixed(decimal) : Math.round(val)) + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const grid = document.querySelector('.stat-cards-grid');
+    if (grid) observer.observe(grid);
+  })();
   (function() {
     const CIRCUMFERENCE = 565.49;
     const TARGET = 91;
