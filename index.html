@@ -1367,29 +1367,29 @@
       <a href="#audit" class="btn-primary">Click Here To Speak To An Expert</a>
       <p class="hero-note">No sales pitch. A real audit delivered in 5 business days.</p>
     </div>
-    <div class="hero-form-box" id="audit">
+    <form class="hero-form-box" id="audit" action="https://formspree.io/f/mdavjdqy" method="POST">
       <h3>See exactly where your website is costing you RFQs.</h3>
       <p>We'll audit your site against how aerospace and defense buyers actually evaluate suppliers — and show you what to fix first.</p>
       <div class="form-field">
         <label>First Name</label>
-        <input type="text" placeholder="Jane">
+        <input type="text" name="first_name" placeholder="Jane" required>
       </div>
       <div class="form-field">
         <label>Work Email</label>
-        <input type="email" placeholder="jane@company.com">
+        <input type="email" name="email" placeholder="jane@company.com" required>
       </div>
       <div class="form-field">
         <label>Company Name</label>
-        <input type="text" placeholder="Acme Manufacturing">
+        <input type="text" name="company" placeholder="Acme Manufacturing" required>
       </div>
       <div class="form-field">
         <label>Website URL</label>
-        <input type="text" placeholder="https://www.company.com">
+        <input type="text" name="website" placeholder="https://www.company.com" required>
         <div class="field-note">Required — this is what we audit.</div>
       </div>
       <div class="form-field">
         <label>Your Role</label>
-        <select>
+        <select name="role" required>
           <option value="" disabled selected>Select one...</option>
           <option>CEO / President</option>
           <option>VP / Director of Business Development</option>
@@ -1398,9 +1398,9 @@
           <option>Other</option>
         </select>
       </div>
-      <button class="form-submit">Click Here To Speak To An Expert</button>
+      <button type="submit" class="form-submit">Click Here To Speak To An Expert</button>
       <p class="form-privacy">We respect your inbox. One follow-up, then your audit. <a href="#">Privacy policy</a>.</p>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -1889,25 +1889,25 @@
         <li>Prioritized fix list you can act on immediately</li>
       </ul>
     </div>
-    <div class="hero-form-box">
+    <form class="hero-form-box" action="https://formspree.io/f/mdavjdqy" method="POST">
       <h3>Request your free website audit.</h3>
       <p>No credit card. No pitch call required. Delivered in 5 business days.</p>
       <div class="form-field">
         <label>First Name</label>
-        <input type="text" placeholder="Jane">
+        <input type="text" name="first_name" placeholder="Jane" required>
       </div>
       <div class="form-field">
         <label>Work Email</label>
-        <input type="email" placeholder="jane@company.com">
+        <input type="email" name="email" placeholder="jane@company.com" required>
       </div>
       <div class="form-field">
         <label>Website URL</label>
-        <input type="text" placeholder="https://www.company.com">
+        <input type="text" name="website" placeholder="https://www.company.com" required>
         <div class="field-note">Required — this is what we audit.</div>
       </div>
       <div class="form-field">
         <label>Your Role</label>
-        <select>
+        <select name="role" required>
           <option value="" disabled selected>Select one...</option>
           <option>CEO / President</option>
           <option>VP / Director of Business Development</option>
@@ -1916,9 +1916,9 @@
           <option>Other</option>
         </select>
       </div>
-      <button class="form-submit">Click Here To Speak To An Expert</button>
+      <button type="submit" class="form-submit">Click Here To Speak To An Expert</button>
       <p class="form-privacy">We respect your inbox. One follow-up, then your audit. <a href="#">Privacy policy</a>.</p>
-    </div>
+    </form>
   </div>
 </section>
 
