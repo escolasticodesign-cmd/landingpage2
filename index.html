@@ -42,14 +42,21 @@
   /* ============ NAV ============ */
   nav {
     background: var(--navy);
-    padding: 0 3rem;
     height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    padding: 0 3rem;
+  }
+
+  .nav-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .nav-logo-wrap {
@@ -1386,16 +1393,18 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo-wrap">
-    <div class="nav-logo"><span>max</span>burst</div>
-    <div class="nav-tagline">web design • development • marketing</div>
-  </div>
-  <div class="nav-right">
-    <a href="tel:8889629932" class="nav-phone">
-      <span class="nav-phone-icon">📞</span>
-      (888) 962-9932
-    </a>
-    <a href="#audit" class="nav-cta">Click Here To Speak To An Expert</a>
+  <div class="nav-inner">
+    <div class="nav-logo-wrap">
+      <div class="nav-logo"><span>max</span>burst</div>
+      <div class="nav-tagline">web design • development • marketing</div>
+    </div>
+    <div class="nav-right">
+      <a href="tel:8889629932" class="nav-phone">
+        <span class="nav-phone-icon">📞</span>
+        (888) 962-9932
+      </a>
+      <a href="#audit" class="nav-cta">Click Here To Speak To An Expert</a>
+    </div>
   </div>
 </nav>
 
@@ -1418,7 +1427,7 @@
     <form class="hero-form-box" id="audit" action="https://formspree.io/f/mdavjdqy" method="POST">
       <div class="form-fields">
         <h3>See exactly where your website might be costing you RFQs.</h3>
-        <p style="color:#eeeeee";">We'll audit your site against how aerospace and defense buyers actually evaluate suppliers — and show you what to fix first.<br><br></p>
+        <p style="color:#eeeeee;">We'll audit your site against how aerospace and defense buyers actually evaluate suppliers — and show you what to fix first.<br><br></p>
         <div class="form-field">
           <label>First Name</label>
           <input type="text" name="first_name" placeholder="Jane" required>
